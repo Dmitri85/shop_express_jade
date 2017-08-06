@@ -1,0 +1,15 @@
+extends layout
+block content
+    .row
+        -for(var i = 0; i<toLoad.length; i++){
+            .col-sm-3.col-xs-offset-2.col-sm-offset-0
+                .single-product
+                    a(href='/single/' + toLoad[i].category+'/' + toLoad[i].subCattegory + '/'+ toLoad[i].id)
+                        img(src=toLoad[i].image)
+                    h4= toLoad[i].name
+                    .bottom-line
+                        p= toLoad[i].price
+                        input.product-url(type='hidden', value='/single/' + toLoad[i].category+'/' + toLoad[i].subCattegory + '/'+ toLoad[i].id)
+                        button.btn.btn-default.add-btn(type='button', aria-label='Left Align') ADD   
+                            span.glyphicon.glyphicon-shopping-cart(aria-hidden='true')
+        -}

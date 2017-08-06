@@ -1,0 +1,44 @@
+extends layout
+block content
+    .conteiner.single-product-div
+        .row.single-product-upper-section
+            .col-sm-4.single-product-img-wrapper 
+                img(class="single-product-img" src=toLoad.image)
+            .col-sm-8
+                h4= 'Description'
+                p= toLoad.description
+        .row.single-product-bottom-section
+            .col-sm-4
+                input.rating(type='hidden', value='0')
+                .fb-share-button(data-href='https://developers.facebook.com/docs/plugins/', data-layout='button', data-size='large', data-mobile-iframe='false')
+                    a.fb-xfbml-parse-ignore(target='_blank', href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&src=sdkpreparse') Share
+
+            .col-sm-8.option-section
+                .opt
+                    -for(var opt in toLoad.options){
+                        div(class=opt)
+                            span= opt + ':'
+                            input(type='hidden', value='')
+                            -for(var i = 0; i < toLoad.options[opt].length; i++){
+                                .opt-opt(style="color:" + toLoad.options[opt][i])= toLoad.options[opt][i]
+                            -}
+                        br
+
+                    -}
+        .row.single-bottom
+            .col-sm-8.col-sm-offset-4
+                button.btn.btn-default.btn-add-single-page(type='button', aria-label='Left Align') ADD   
+                    span.glyphicon.glyphicon-shopping-cart(aria-hidden='true')
+                .qty-select
+                    //- label(for='sel1') Qty:
+                    select#sel1.form-control
+                        option 1
+                        option 2
+                        option 3
+                        option 4
+                        option 5
+                        option 6                
+                | price:
+                span.single-price= toLoad.price
+                | Total: 
+                input(value=toLoad.price readonly)  

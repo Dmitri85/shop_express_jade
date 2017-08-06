@@ -1,0 +1,116 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css')
+    link(rel='stylesheet', href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css")
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/node_modules/bootstrap-rating/bootstrap-rating.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='/node_modules/bootstrap-rating/bootstrap-rating.min.js')
+    title= 'My Shop'
+    
+  body
+      #fb-root
+      nav.navbar.navbar-default#main-head
+        .container-fluid
+            a.navbar-brand(href='/')
+              img(id='img-logo' alt='Brand', src='https://nodejs.org/static/images/logos/nodejs-new-pantone-black.png')
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href="#signup" data-toggle="modal" data-target=".bs-modal-sm" class="logEnter") login / sing in
+              li
+                a(href='/cart')
+                  span.glyphicon.glyphicon-shopping-cart#btn-shopping(aria-hidden='true')
+                    span.badge#badge-qty= 0
+
+      .wraper.container        
+        .row
+          .col-sm-2.side-nav
+            #accordion.panel-group(role='tablist', aria-multiselectable='true')
+              - for(var mainCat in cat){
+                .panel.panel-default
+                  #headingOne.panel-heading(role='tab')
+                    h4.panel-title
+                      a(role='button', data-toggle='collapse', data-parent='#accordion', href='#' + mainCat, aria-expanded='true', aria-controls='collapseOne')
+                        | #{mainCat}
+                  .panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne' id= mainCat)
+                    .panel-body
+                      -for(var sub in cat[mainCat]){
+                        a.menuLinks(href= '/' + mainCat + '/' + sub)= sub
+                        -}
+                 -}   
+          .col-sm-10.products-section
+            block content
+      nav.navbar.navbar-default#main-head
+        .container-fluid
+          .navbar-header
+      #myModal.modal.fade.bs-modal-sm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+        .modal-dialog.modal-sm
+          .modal-content
+            br
+            .bs-example.bs-example-tabs
+              ul#myTab.nav.nav-tabs
+                li.active
+                  a(href='#signin', data-toggle='tab') Sign In
+                li
+                  a(href='#signup', data-toggle='tab') Register
+            .modal-body
+              #myTabContent.tab-content
+                #signin.tab-pane.fade.active.in
+                  form.form-horizontal
+                    fieldset
+                      // Sign In Form
+                      // Text input
+                      .control-group
+                        label.control-label(for='userid') eMail:
+                        .controls
+                          input#userid.form-control(required='', name='userid', type='text', placeholder='eMail')
+                      // Password input
+                      .control-group
+                        label.control-label(for='passwordinput') Password:
+                        .controls
+                          input#passwordinput.form-control(required='', name='passwordinput', type='password', placeholder='********')
+                      // Button
+                      .control-group
+                        label.control-label
+                        .controls
+                          button#signin.btnSigninMy.btn.btn-success(data-dismiss='modal') Sign In
+                          button#facebook-btn.btn.btn-default
+                            i.fa.fa-facebook-square(aria-hidden='true')
+                          button#google-btn.btn.btn-default
+                            i.fa.fa-google-plus-square(aria-hidden='true')
+                #signup.tab-pane.fade
+                  form.form-horizontal
+                    fieldset
+                      // Sign Up Form
+                      // Text input
+                      .control-group
+                        label.control-label(for='userid') eMail:
+                        .controls
+                          input#useridUp.form-control(name='userid', type='text', placeholder='', required='')
+                      // Password input
+                      .control-group
+                        label.control-label(for='password') Password:
+                        .controls
+                          input#passwordUp.form-control(name='password', type='password', placeholder='********', required='')
+                          em 1-8 Characters
+                      // Button
+                      .control-group
+                        label.control-label(for='confirmsignup')
+                        .controls
+                          button#confirmsignup.btn.btn-success(data-dismiss='modal') Sign Up
+            .modal-footer
+              center
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+    
+  script(src="/javascripts/client.js")
+
+
+
+      
+      
+      
+
+
